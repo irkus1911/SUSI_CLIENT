@@ -12,20 +12,21 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" 
+      prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" 
+      fx:controller="client.controllers.VSignUpController">
    <children>
       <VBox layoutX="211.0" layoutY="100.0" prefHeight="200.0" prefWidth="178.0">
          <children>
-            <TextField promptText="Username" />
+            <TextField fx:id="fieldUsername" promptText="Username" />
             <Separator opacity="0.0" prefHeight="20.0" prefWidth="178.0" />
-            <TextField promptText="Email" />
+            <TextField fx:id="fieldEmail" promptText="Email" />
             <Separator opacity="0.0" prefHeight="20.0" prefWidth="178.0" />
-            <TextField promptText="Full Name" />
+            <TextField fx:id="fieldFullName" promptText="Full Name" />
             <Separator opacity="0.0" prefHeight="20.0" prefWidth="178.0" />
-            <PasswordField promptText="Password" />
+            <PasswordField fx:id="fieldPassword" promptText="Password" />
             <Separator opacity="0.0" prefHeight="20.0" prefWidth="178.0" />
-            <PasswordField promptText="Confirm Password" />
+            <PasswordField fx:id="fieldConfirmPassword" promptText="Confirm Password" />
          </children>
       </VBox>
       <VBox alignment="TOP_RIGHT" layoutX="103.0" layoutY="96.0" prefHeight="234.0" prefWidth="100.0">
@@ -64,9 +65,9 @@
       </VBox>
       <HBox alignment="CENTER_RIGHT" layoutX="2.0" layoutY="300.0" prefHeight="100.0" prefWidth="594.0">
          <children>
-            <Button mnemonicParsing="false" text="SignUp" />
+            <Button fx:id="buttonSignUp" mnemonicParsing="false" text="SignUp" />
             <Separator opacity="0.0" orientation="VERTICAL" prefHeight="100.0" prefWidth="34.0" />
-            <Button mnemonicParsing="false" text="Back" />
+            <Button fx:id="buttonBack" mnemonicParsing="false" text="Back" />
             <Separator opacity="0.0" orientation="VERTICAL" prefHeight="100.0" prefWidth="39.0" />
          </children>
       </HBox>
