@@ -8,7 +8,9 @@ package client.controllers;
 import java.awt.event.MouseEvent;
 import static java.awt.event.MouseEvent.MOUSE_CLICKED;
 import java.io.IOException;
+import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.regex.Pattern;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -36,9 +38,9 @@ public class VSignUpController {
 
     @FXML
     private TextField fieldUsername, fieldEmail, fieldFullName;
-    //@FXML
+    @FXML
     private PasswordField fieldPassword, fieldConfirmPassword;
-    //@FXML
+    @FXML
     private Button buttonSignUp, buttonBack;
 
     public Stage getStage() {
@@ -52,22 +54,125 @@ public class VSignUpController {
     public void initStage(Parent root) {
         logger.info("Init stage signUp");
         Scene scene = new Scene(root);
-        buttonSignUp = new Button();
-        buttonSignUp.setOnMouseClicked(this::handleTextChanged);
-        //buttonSignUp.addEventHandler(MouseEvent.MOUSE_CLICKED,this::handleTextChanged);
         stage.setTitle("SIGN UP");
         stage.setResizable(false);
+
+        buttonSignUp.setOnAction(this::handleSignUp);
+        buttonBack.setOnAction(this::handleBack);
+
         stage.setScene(scene);
         stage.show();
     }
 
-    @FXML
-    private void handleTextChanged() {
-        Alert alert = new Alert(Alert.AlertType.ERROR);
-        alert.setHeaderText(null);
-        alert.setTitle("Error");
-        alert.setContentText("Error en la aplicacion");
-        alert.showAndWait();
+    private void handleSignUp(ActionEvent event) {
+
+        maxCharacteres();
+        emailPattern();
+        confirmPassword();
+        informedFields();
+
+    }
+
+    private void informedFields() {
+
+        if (fieldUsername.getText().trim().isEmpty()) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setHeaderText("CAMPO USERNAME VACIO");
+            alert.setContentText("No puedes dejar el campo vacio");
+            alert.show();
+        } else if (fieldEmail.getText().trim().isEmpty()) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setHeaderText("CAMPO EMAIL VACIO");
+            alert.setContentText("No puedes dejar el campo vacio");
+            alert.show();
+        } else if (fieldFullName.getText().trim().isEmpty()) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setHeaderText("CAMPO FULL NAME VACIO");
+            alert.setContentText("No puedes dejar el campo vacio");
+            alert.show();
+        } else if (fieldPassword.getText().trim().isEmpty()) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setHeaderText("CAMPO PASSWORD VACIO");
+            alert.setContentText("No puedes dejar el campo vacio");
+            alert.show();
+        } else if (fieldConfirmPassword.getText().trim().isEmpty()) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setHeaderText("CAMPO CONFIRM PASSWORD VACIO");
+            alert.setContentText("No puedes dejar el campo vacio");
+            alert.show();
+        }
+
+    }
+
+    //Falla la validacion del email
+    private void emailPattern() {
+        if (!Pattern.matches(fieldEmail.getText(), "\b[a-zA-Z0-9._]+@[a-z]{2,4}\b")) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setHeaderText("CAMPO EMAIL NO VALIDO");
+            alert.setContentText("El campo email debe tener este formato algo@algo.algo");
+            alert.show();
+        }
+
+    }
+
+    private void maxCharacteres() {
+
+        if (fieldUsername.getText().trim().length() >= 255) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setHeaderText("LIMITE SUPERADO 255 CARACTERES");
+            alert.setContentText("No se puede superar los 255 caracteres");
+            alert.show();
+        } else if (fieldEmail.getText().trim().length() >= 255) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setHeaderText("LIMITE SUPERADO 255 CARACTERES");
+            alert.setContentText("No se puede superar los 255 caracteres");
+            alert.show();
+        } else if (fieldFullName.getText().trim().length() >= 255) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setHeaderText("LIMITE SUPERADO 255 CARACTERES");
+            alert.setContentText("No se puede superar los 255 caracteres");
+            alert.show();
+        } else if (fieldPassword.getText().trim().length() >= 255) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setHeaderText("LIMITE SUPERADO 255 CARACTERES");
+            alert.setContentText("No se puede superar los 255 caracteres");
+            alert.show();
+        } else if (fieldConfirmPassword.getText().trim().length() >= 255) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setHeaderText("LIMITE SUPERADO 255 CARACTERES");
+            alert.setContentText("No se puede superar los 255 caracteres");
+            alert.show();
+        }
+
+    }
+
+    private void confirmPassword() {
+
+        if (!fieldPassword.getText().equals(fieldConfirmPassword.getText())) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setHeaderText("CONTRASEÑA NO COINCIDE");
+            alert.setContentText("Los campos de contraseñas deben coincidir");
+            alert.show();
+        }
+
+    }
+
+    private void handleBack(ActionEvent event) {
+        /*
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("controllers/VSignIn.fxml"));
+        Parent root = null;
+        try {
+            root = (Parent)loader.load();
+        } catch (IOException ex) {
+            Logger.getLogger(VSignUpController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+      
+    
+        
+        Stage stage = new Stage();
+        stage.setScene(new Scene(root,450,450));
+        stage.show();
+         */
     }
 
 }
