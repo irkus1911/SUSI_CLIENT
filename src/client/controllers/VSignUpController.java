@@ -16,6 +16,7 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
@@ -26,6 +27,7 @@ import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import javafx.stage.Window;
 import javafx.stage.WindowEvent;
+import lib.dataModel.User;
 
 /**
  *
@@ -66,11 +68,21 @@ public class VSignUpController {
 
     private void handleSignUp(ActionEvent event) {
 
-        maxCharacteres();
-        emailPattern();
-        confirmPassword();
         informedFields();
+        maxCharacteres();
+        //userCharacterLimitation();
+        //emailPattern();
+        confirmPassword();
 
+        User user = new User();
+        user.setLogin(fieldUsername.getText());
+        user.setEmail(fieldEmail.getText());
+        user.setFullName(fieldFullName.getText());
+        user.setPassword(fieldPassword.getText());
+
+        //LogicableFactory logicableFactory = new LogicableFactory();
+        //logicableFactory.getDataTraffic().signUp(user);
+        
     }
 
     private void informedFields() {
@@ -104,7 +116,7 @@ public class VSignUpController {
 
     }
 
-    //Falla la validacion del email
+    //Error en la validacion del email
     private void emailPattern() {
         if (!Pattern.matches(fieldEmail.getText(), "\b[a-zA-Z0-9._]+@[a-z]{2,4}\b")) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -157,22 +169,30 @@ public class VSignUpController {
 
     }
 
+    //Falla el pattern
+    private void userCharacterLimitation() {
+
+        if (!Pattern.matches(fieldUsername.getText(), "[^a-zA-Z0-9]")) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setHeaderText("NO ES ALFANUMERICO");
+            alert.setContentText("El campo no es alfanumerico");
+            alert.show();
+        }
+
+    }
+
     private void handleBack(ActionEvent event) {
-        /*
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("controllers/VSignIn.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/client/controllers/VSignIn.fxml"));
         Parent root = null;
         try {
-            root = (Parent)loader.load();
+            root = (Parent) loader.load();
         } catch (IOException ex) {
             Logger.getLogger(VSignUpController.class.getName()).log(Level.SEVERE, null, ex);
         }
-      
-    
-        
-        Stage stage = new Stage();
-        stage.setScene(new Scene(root,450,450));
-        stage.show();
-         */
+        VSignInController controller = (VSignInController) loader.getController();
+        controller.setStage(stage);
+        controller.initStage(root);
+
     }
 
 }
