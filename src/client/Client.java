@@ -5,17 +5,31 @@
  */
 package client;
 
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.net.Socket;
+import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import lib.dataModel.User;
+import lib.message.Message;
+import lib.message.Msg;
+
 /**
  *
- * @author 2dam
+ * @author Adrian Franco
  */
 public class Client {
+
+
 
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        // TODO code application logic here
+
     }
     
+
 }
