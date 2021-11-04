@@ -26,9 +26,9 @@
             </Label>
             <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                <children>
-                  <Button mnemonicParsing="false" text="LogOut" />
+                  <Button fx:id="btnLogOut" mnemonicParsing="false" onAction="#handleLogOutAction" text="LogOut" />
                   <Separator opacity="0.0" orientation="VERTICAL" prefHeight="100.0" prefWidth="35.0" />
-                  <Button mnemonicParsing="false" text="Exit" />
+                  <Button fx:id="btnExit" mnemonicParsing="false" onAction="#handleExitAction" text="Exit" />
                </children>
             </HBox>
          </children>
